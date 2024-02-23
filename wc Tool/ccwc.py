@@ -15,14 +15,28 @@ def count_bytes(filename):
     except IOError:
         print(f"Error reading {filename}")
 
+def count_lines(filename):
+    try:
+        with open(filename, 'r') as file:
+            #getting lines count with length of array
+            lines_count = len(file.readlines())
+            print(f"{lines_count} {filename}")
+    except FileNotFoundError:
+        print(f"Error: {filename} not found")
+    except IOError:
+        print(f"Error reading {filename}")
+
 def main():
     parser = argparse.ArgumentParser(description="sample text for tool")
     parser.add_argument('filename', help='Path to file')
     parser.add_argument('-c', action="store_true", help="sample text for details")
+    parser.add_argument('-l', action="store_true", help="sample text for details")
     args = parser.parse_args()
 
     if args.c:
         count_bytes(args.filename)
+    elif args.l:
+        count_lines(args.filename)
     else:
         print(f"work in progress {args.filename}")
 
