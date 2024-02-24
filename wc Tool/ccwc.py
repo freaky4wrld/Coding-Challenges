@@ -9,7 +9,7 @@ def count_bytes(filename):
         with open(filename,'rb') as file:
             #get file_size in bytes
             file_size = os.path.getsize(filename)
-            print(f"{file_size} {filename}")
+            return file_size
     except FileNotFoundError:
         print(f"Error: {filename} not found")
     except IOError:
@@ -20,7 +20,7 @@ def count_lines(filename):
         with open(filename, 'r') as file:
             #getting lines count with length of array
             lines_count = len(file.readlines())
-            print(f"{lines_count} {filename}")
+            return lines_count
     except FileNotFoundError:
         print(f"Error: {filename} not found")
     except IOError:
@@ -33,7 +33,7 @@ def count_words(filename):
             word_count = 0
             for line in file.readlines():
                 word_count+=len(line.split())
-            print(f"{word_count} {filename}")    
+            return word_count    
     except FileNotFoundError:
         print(f"Error: {filename} not found")
     except IOError:
@@ -44,7 +44,7 @@ def count_characters(filename):
         with open(filename, 'rb') as file:
             #getting words count
             char_count = len(file.read())
-            print(f"{char_count} {filename}")    
+            return char_count    
     except FileNotFoundError:
         print(f"Error: {filename} not found")
     except IOError:
@@ -61,15 +61,15 @@ def main():
     args = parser.parse_args()
 
     if args.c:
-        count_bytes(args.filename)
+        print(f"{count_bytes(args.filename)} {args.filename}")
     elif args.l:
-        count_lines(args.filename)
+        print(f"{count_lines(args.filename)} {args.filename}")
     elif args.w:
-        count_words(args.filename)
+        print(f"{count_words(args.filename)} {args.filename}")
     elif args.m:
-        count_characters(args.filename)
+        print(f"{count_characters(args.filename)} {args.filename}")
     else:
-        print(f"work in progress {args.filename}")
+        print(f"{count_lines(args.filename)}  {count_words(args.filename)}  {count_bytes(args.filename)} {args.filename}")
 
 
 if __name__ == "__main__":
