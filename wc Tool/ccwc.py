@@ -26,17 +26,33 @@ def count_lines(filename):
     except IOError:
         print(f"Error reading {filename}")
 
+def count_words(filename):
+    try:
+        with open(filename, 'r') as file:
+            #getting words count
+            word_count = 0
+            for line in file.readlines():
+                word_count+=len(line.split())
+            print(f"{word_count} {filename}")    
+    except FileNotFoundError:
+        print(f"Error: {filename} not found")
+    except IOError:
+        print(f"Error reading {filename}")
+
 def main():
     parser = argparse.ArgumentParser(description="sample text for tool")
     parser.add_argument('filename', help='Path to file')
     parser.add_argument('-c', action="store_true", help="sample text for details")
     parser.add_argument('-l', action="store_true", help="sample text for details")
+    parser.add_argument('-w', action="store_true", help="sample text here for details")
     args = parser.parse_args()
 
     if args.c:
         count_bytes(args.filename)
     elif args.l:
         count_lines(args.filename)
+    elif args.w:
+        count_words(args.filename)
     else:
         print(f"work in progress {args.filename}")
 
